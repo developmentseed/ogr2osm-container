@@ -8,6 +8,11 @@ Container for running [ogr2osm](https://github.com/pnorman/ogr2osm) in an OS agn
 3. In the command line, go to unzipped folder root of the repository, build the Docker container:  
 `docker build -t ogr2osm .`
 
+### Troubleshooting
+**While building on Windows you get `no matching manifest for windows/amd64 in the manifest list`**. 
+
+Make sure that you are using [Linux Containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) and rebuild.
+
 ## Processing data
 After the initial setup, you can convert data by following these steps:
 
