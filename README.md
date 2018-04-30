@@ -8,11 +8,6 @@ Container for running [ogr2osm](https://github.com/pnorman/ogr2osm) in an OS agn
 3. In the command line, go to unzipped folder root of the repository, build the Docker container:  
 `docker build -t ogr2osm .`
 
-### Troubleshooting
-**While building on Windows you get `no matching manifest for windows/amd64 in the manifest list`**. 
-
-Make sure that you are using [Linux Containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) and rebuild.
-
 ## Processing data
 After the initial setup, you can convert data by following these steps:
 
@@ -23,3 +18,18 @@ for example:
 `docker run -it --rm -v $(pwd):/data ogr2osm python ogr2osm.py /data/roads_senegal.shp -o /data/roads-sen.osm`
 
 This command will run ogr2osm with the default settings, but you can pass [https://github.com/pnorman/ogr2osm#usage]()
+
+## Troubleshooting
+
+### No matching manifest
+`no matching manifest for windows/amd64 in the manifest list`
+
+If you get this message while building on Windows, make sure that you are using [Linux Containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) and run the `docker build -t ogr2osm .` again.
+
+### Invalid characters for a local volume name
+`docker: Error response from daemon: create ${pwd}: "${pwd}" includes invalid characters for a local volume name`
+
+You are likely running this in Command Prompt on Windows. If you have Windows 10, consider using Powershell instead and run the same command again.
+
+To fix this in Command Prompt, substitute `${pwd}` for the full path of the folder you are in. For example:  
+`docker run -it --rm -v C:\Users\John\ogr2osm-container:/data ogr2osm python ogr2osm.py /data/roads_senegal.shp -o /data/roads-sen.osm`
